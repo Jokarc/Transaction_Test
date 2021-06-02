@@ -2,7 +2,7 @@
 book
 Book
 10.880000
-80
+60
 0.900000
 none
 book2

@@ -17,6 +17,8 @@ string
 D:/code/c/oop_c/Transaction_Test/Customer.h
 User.h
 D:/code/c/oop_c/Transaction_Test/User.h
+ShopCart.h
+D:/code/c/oop_c/Transaction_Test/ShopCart.h
 iostream
 -
 
@@ -41,6 +43,16 @@ D:/code/c/oop_c/Transaction_Test/Product.h
 D:/code/c/oop_c/Transaction_Test/Product.h
 User.h
 D:/code/c/oop_c/Transaction_Test/User.h
+
+D:/code/c/oop_c/Transaction_Test/ShopCart.h
+Product.h
+D:/code/c/oop_c/Transaction_Test/Product.h
+io.h
+D:/code/c/oop_c/Transaction_Test/io.h
+vector
+-
+set
+-
 
 D:/code/c/oop_c/Transaction_Test/User.h
 string

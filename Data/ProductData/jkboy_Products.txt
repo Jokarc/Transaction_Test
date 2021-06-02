@@ -2,12 +2,12 @@
 book
 Book
 100
-1
+3
 0.650000
 none
 clothes
 Clothes
 100
-1
+4
 1
 none

@@ -14,23 +14,30 @@ protected:
     string name;
     string productDescription;
     string owner;
+    string Kind;
 
 public:
-    virtual double getPrice(){
-        return 0;
+    Product(string _name, string _Kind, double _price, int _num, double _dis, string _descrip, string _Mer) {
+        name = _name;
+        Kind = _Kind;
+        price = _price;
+        discount = _dis;
+        num = _num;
+        productDescription = _descrip;
+        owner = _Mer;
     }
+    virtual double getPrice(){return price;}
     bool IsDiscount() {return isDiscount;}
     string ShowProductDescription() {return productDescription;}
     string ShowOwner() {return owner;}
     string ShowName() {return name;}
     int ShowNum() {return num;}
     int productResNum() {return num;}
-    void setInfo(string name_, double price_, int num_, double discount_, string productDescription_, string owner_) {
-        name = name_;
-        price = price_;
-        num = num_;
-        productDescription = productDescription_;
-        owner = owner_;
+    void setNum(int _num) {
+        num = _num;
+    }
+    void setPrice(double pri) {
+        price = pri;
     }
     bool operator<(const Product& y) const {
         return price < y.price;

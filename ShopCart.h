@@ -5,13 +5,17 @@
 #ifndef TRANSACTION_TEST_SHOPCART_H
 #define TRANSACTION_TEST_SHOPCART_H
 #include "Product.h"
+#include "io.h"
 #include <vector>
 #include <set>
 struct OrderInfoToChange {
     char filename[50] = "";
     int linenum;
     int thisproductNum;
+    double pri;
+    string thisName;
     string linedata;
+    string MerName;
 };
 class ShopCart {
 protected:
@@ -27,6 +31,9 @@ public:
         needToPay = 0;
         priceToPay = 0;
     }
+    ~ShopCart() {
+        if (needToPay) CancelOrder();
+    }
     int GenerateOrder();
     int SettleOrder();
     int CancelOrder();
@@ -35,6 +42,9 @@ public:
     void Show();
     void Clear();
     void AddProduct();
+    void ManageShopCartProduct();
+    void ShowOrder();
+    void OutProduct(string name, string price, string num, string dis, string descrip, string Mer);
 };
 /**********************************************************
 函数：ShopCat::Show
@@ -80,6 +90,18 @@ void ShopCart::Clear() {
     if (op == 1) ProductList.clear();
     if (op == 2) return ;
 }
+void ShopCart::OutProduct(string name, string price, string num, string dis, string descrip, string Mer) {
+    cout << "商品名称：" << name << endl;
+    cout << "商品定价：" << price << endl;
+    cout << "商品库存：" << num << endl;
+    double k = Operation.Converse(dis);
+    double newPrice = k * Operation.Converse(price);
+    double koff = 1-k;
+    cout << "折扣力度：减" << koff * 100 << "%，实时价格：" << newPrice << endl;
+    cout << "商品描述：" << descrip << endl;
+    cout << "在售商家：" << Mer << endl;
+    cout << "*------------------------*" << endl;
+}
 /**********************************************************
 函数：AddProduct
 形参：
@@ -88,7 +110,182 @@ void ShopCart::Clear() {
 返回：
 **********************************************************/
 void ShopCart::AddProduct() {
+    cout << "请输入要查找的商品名称" << endl;
+    string namefind;
+    getline(cin, namefind);
+    int namefindok = 0;
+    string inPath = "../Data/ProductData/*.txt";
+    //***********
+    long handle;
+    struct _finddata_t fileinfo;
+    handle = _findfirst(inPath.c_str(), &fileinfo);
+    if (handle == -1) return ;
+    do {
+        char filename[100] = "../Data/ProductData/";
+        strcat(filename, fileinfo.name);
+        ifstream FileIn(filename, ios::in);
+        if (!FileIn) {
+            cout << "can't find " << filename << " when ShopCart AddProduct." << endl;
+            continue;
+        }
+        int line = -4;
+        string name, kind, price, num, dis, descrip,Mer = "", Mer1="";
+        for (int i = 0; fileinfo.name[i] != '.'; i++) Mer1 += fileinfo.name[i];
+        int l = Mer1.length();
+        Mer = Mer1.substr(0, l-9);
+        getline(FileIn, name);
+        while (getline(FileIn, name)) {
+            getline(FileIn, kind);
+            getline(FileIn, price);
+            getline(FileIn, num);
+            getline(FileIn, dis);
+            getline(FileIn, descrip);
+            line += 6;
+            if (name == namefind){
+                namefindok = 1;
+                OutProduct(name,price,num,dis,descrip,Mer);
+                break;
+            }
+        }
+        FileIn.close();
+    } while (!_findnext(handle, &fileinfo));
+    _findclose(handle);
+    //*************
+    if (!namefindok) cout << "您要找的商品不存在" << endl;
+    else {
+        cout << "以上商品均为您要找的商品，请输入您要加购的商品所属商家" << endl;
+        string MerchantName;
+        getline(cin, MerchantName);
+        char FileName[50] = "../Data/ProductData/";
+        Operation.StrCat(FileName, MerchantName);
+        strcat(FileName, "_Products.txt");
+        ifstream FileIn(FileName, ios::in);
+        if (!FileIn) {
+            cout << "can't find " << FileName << " when AddProduct with MerchantName." << endl;
+            return ;
+        }
+        string name, kind, price, num, dis, descrip;
+        getline(FileIn, name);
+        while (getline(FileIn, name)) {
+            getline(FileIn, kind);
+            getline(FileIn, price);
+            getline(FileIn, num);
+            getline(FileIn, dis);
+            getline(FileIn, descrip);
+            if (name == namefind){
+                set<Product>::iterator iter;
+                for (iter = ProductList.begin(); iter != ProductList.end(); iter++) {
+                    Product p = *iter;
+                    if (p.ShowName() == name && p.ShowOwner() == MerchantName) {
+                        cout << "商品已存在购物车，可以返回修改数量" << endl;
+                        return ;
+                    }
+                }
+                cout << "已找到商品，请输入加购数量，正整数" << endl;
+                string s;
+                getline(cin, s);
+                int x = Operation.checkInt(s);
+                if (!x) {
+                    cout << "输入不合法" << endl;
+                    return ;
+                }
+                x = (int) Operation.Converse(s);
+                if (x < 0) {
+                    cout << "请输入正数" << endl;
+                    return ;
+                }
+                double pri = Operation.Converse(price);
+                pri *= Operation.Converse(dis);
+                Product pro = Product(name,kind, pri,x,
+                                      Operation.Converse(dis),descrip, MerchantName);
+                ProductList.insert(pro);
+                cout << "已加购" << endl;
+                break;
+            }
+        }
+    }
+}
+/**********************************************************
+函数：ManageShopCartProduct
+形参：
+类型：void
+作用：管理购物车商品
+返回：
+**********************************************************/
+void ShopCart::ManageShopCartProduct() {
+    string namefind, Merfind;
+    int findok = 0;
+    cout << "请输入要管理的商品名称" << endl;
+    getline(cin, namefind);
+    cout << "请输入要管理的商品所属商家" << endl;
+    getline(cin, Merfind);
+    set<Product>::iterator iter;
+    for (iter = ProductList.begin(); iter != ProductList.end(); iter++) {
+        Product temp = *iter;
+        if (temp.ShowName() == namefind && temp.ShowOwner() == Merfind) {
+            findok = 1;
+            while (1) {
+                cout << "*----------------------*" << endl;
+                cout << "1：调整数量" << endl;
+                cout << "2：从购物车移除" << endl;
+                cout << "-1：返回" << endl;
+                cout << "*----------------------*" << endl;
+                int op = Operation.checkOp();
+                if (op == -1) break;
+                if (op == 1) {
+                    cout << "请输入新数量，正整数" << endl;
+                    string s;
+                    getline(cin, s);
+                    int x = Operation.checkInt(s);
+                    if (!x) {
+                        cout << "输入不合法" << endl;
+                        continue;
+                    }
+                    x = (int) Operation.Converse(s);
+                    if (x <= 0) {
+                        cout << "请输入正数" << endl;
+                        continue;
+                    }
+                    Product np = temp;
+                    np.setNum(x);
+                    ProductList.erase(iter);
+                    ProductList.insert(np);
+                    return ;
+                }
+                if (op == 2) {
+                    ProductList.erase(iter);
 
+                }
+            }
+        }
+    }
+    if (!findok) {
+        cout << "未加购来自" << Merfind << "的商品" << namefind << endl;
+    }
+}
+/**********************************************************
+函数：ShowOrder
+形参：
+类型：void
+作用：显示订单
+返回：
+**********************************************************/
+void ShopCart::ShowOrder() {
+    if (!needToPay) {
+        cout << "未生成订单" << endl;
+        return ;
+    }
+    double totpri = 0;
+    for (int i = 1; i <= AddedNum; i++) {
+        totpri += myorder[i].pri * myorder[i].thisproductNum;
+        cout << "*------------------------*" << endl;
+        cout << "商品名称：" << myorder[i].thisName << endl;
+        cout << "商品单价：" << myorder[i].pri << endl;
+        cout << "购买数量：" << myorder[i].thisproductNum << endl;
+        cout << "所属商家：" << myorder[i].MerName << endl;
+    }
+    cout << "*------------------------*" << endl;
+    cout << "需支付" << totpri << endl;
 }
 /**********************************************************
 函数：GenerateOrder
@@ -103,10 +300,13 @@ int ShopCart::GenerateOrder() {
         cout << "购物车为空" << endl;
         return -1;
     }
+    if (needToPay) {
+        cout << "您还有一笔订单未支付" << endl;
+        return -1;
+    }
     cout << "订单生成中" << endl;
     set<Product>::iterator iter;
     for (iter = ProductList.begin(); iter != ProductList.end(); iter++) {
-        Product Store;
         Product pres = *iter;
         char FileName[50] = "../Data/ProductData/";
         Operation.StrCat(FileName, pres.ShowOwner());
@@ -136,10 +336,14 @@ int ShopCart::GenerateOrder() {
                 existFlag = 1;
                 AddedNum++;
                 strcpy(myorder[AddedNum].filename, FileName);
+                myorder[AddedNum].thisName = temp;
+                myorder[AddedNum].pri = Operation.Converse(temp3) * Operation.Converse(temp5);
+                myorder[AddedNum].MerName = pres.ShowOwner();
                 myorder[AddedNum].linenum = line;
                 myorder[AddedNum].linedata = to_string(StoreNum-pres.ShowNum());
                 myorder[AddedNum].thisproductNum = pres.ShowNum();
                 cout << "商品" << pres.ShowName() << "成功添加" << endl;
+                Operation.ModifyLineData(FileName, line, to_string(StoreNum-pres.ShowNum()));
                 priceToPay += Operation.Converse(temp3) * Operation.Converse(temp5);
             }
         }
@@ -165,6 +369,23 @@ int ShopCart::GenerateOrder() {
 **********************************************************/
 int ShopCart::SettleOrder() {
     if (!needToPay) return -1;
+    for (int i = 1; i <= AddedNum; i++) {
+        string MerName = myorder[i].MerName;
+        char filename[50] = "../Data/UserData/UserBalance.txt";
+        ifstream FileIn(filename, ios::in);
+        string temp;
+        string temp2;
+        int line = 0;
+        while (getline(FileIn, temp)) {
+            getline(FileIn, temp2);
+            line += 2;
+            if (temp == MerName) {
+                double p = Operation.Converse(temp2);
+                p += myorder[i].pri * myorder[i].thisproductNum;
+                Operation.ModifyLineData(filename, line, to_string(p));
+            }
+        }
+    }
     needToPay = 0; AddedNum = 0;
     return 1;
 }
@@ -176,6 +397,10 @@ int ShopCart::SettleOrder() {
 返回：-1，失败，1，成功
 **********************************************************/
 int ShopCart::CancelOrder() {
+    if (!needToPay) {
+        cout << "未生成订单" << endl;
+        return -1;
+    }
     for (int i = 1; i <= AddedNum; i++) {
         ifstream FileIn(myorder[i].filename, ios::in);
         if (!FileIn) {
@@ -197,5 +422,6 @@ int ShopCart::CancelOrder() {
         }
         FileIn.close();
     }
+    return 1;
 }
 #endif //TRANSACTION_TEST_SHOPCART_H

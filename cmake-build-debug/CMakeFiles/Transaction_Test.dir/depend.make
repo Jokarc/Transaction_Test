@@ -6,6 +6,7 @@ CMakeFiles/Transaction_Test.dir/main.cpp.obj: ../Customer.h
 CMakeFiles/Transaction_Test.dir/main.cpp.obj: ../Merchant.h
 CMakeFiles/Transaction_Test.dir/main.cpp.obj: ../Process.h
 CMakeFiles/Transaction_Test.dir/main.cpp.obj: ../Product.h
+CMakeFiles/Transaction_Test.dir/main.cpp.obj: ../ShopCart.h
 CMakeFiles/Transaction_Test.dir/main.cpp.obj: ../User.h
 CMakeFiles/Transaction_Test.dir/main.cpp.obj: ../main.cpp
 

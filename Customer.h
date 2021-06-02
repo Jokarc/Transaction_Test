@@ -37,14 +37,18 @@ public:
 **********************************************************/
 int Customer::SettleMyOrder() {
     if (!myShopCart.OrderExist()) {
-        cout << "无订单" << endl;
+        cout << "未生成订单" << endl;
         return -1;
     }
+    cout << "共需支付" << myShopCart.HowMuch() << endl;
+    cout << "当前余额" << accountBalance << endl;
     if (accountBalance < myShopCart.HowMuch()) {
         cout << "余额不足" << endl;
         return -1;
     }
-    setBalance(accountBalance < myShopCart.HowMuch());
+    setBalance(accountBalance - myShopCart.HowMuch());
+    cout << "支付成功，当前余额" << accountBalance << endl;
+    myShopCart.SettleOrder();
     return 1;
 }
 /**********************************************************
@@ -66,7 +70,7 @@ void Customer::ManageShopCart() {
     if (op == -1) return ;
     if (op == 1) myShopCart.Show();
     if (op == 2) myShopCart.Clear();
-    if (op == 3) myShopCart.ManageProduct();
+    if (op == 3) myShopCart.ManageShopCartProduct();
     if (op == 4) myShopCart.AddProduct();
 }
 /**********************************************************
@@ -77,21 +81,23 @@ void Customer::ManageShopCart() {
 返回：
 **********************************************************/
 void Customer::Shop() {
-    cout << "*----------------------*" << endl;
-    cout << "1：管理购物车" << endl;
-    cout << "2：生成订单" << endl;
-    cout << "3：查看订单" << endl;
-    cout << "4：结算订单" << endl;
-    cout << "5：取消订单" << endl;
-    cout << "-1：返回" << endl;
-    cout << "*----------------------*" << endl;
-    int op = Operation.checkOp();
-    if (op == -1) return ;
-    if (op == 1) ManageShopCart();
-    if (op == 2) myShopCart.GenerateOrder();
-    if (op == 3) myShopCart.ShowOrder();
-    if (op == 4) SettleMyOrder();
-    if (op == 5) myShopCart.CancelOrder();
+    while (1) {
+        cout << "*----------------------*" << endl;
+        cout << "1：管理购物车" << endl;
+        cout << "2：生成订单" << endl;
+        cout << "3：查看订单" << endl;
+        cout << "4：结算订单" << endl;
+        cout << "5：取消订单" << endl;
+        cout << "-1：返回" << endl;
+        cout << "*----------------------*" << endl;
+        int op = Operation.checkOp();
+        if (op == -1) return ;
+        if (op == 1) ManageShopCart();
+        if (op == 2) myShopCart.GenerateOrder();
+        if (op == 3) myShopCart.ShowOrder();
+        if (op == 4) SettleMyOrder();
+        if (op == 5) myShopCart.CancelOrder();
+    }
 }
 void Customer::showBalance() {
     cout << "当前账户余额：" << this -> getAccountBalance() << endl;
