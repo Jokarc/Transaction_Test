@@ -1,0 +1,3 @@
+D:/code/c/oop_c/Transaction_Test/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/code/c/oop_c/Transaction_Test/cmake-build-debug/CMakeFiles/Transaction_Test.dir
+D:/code/c/oop_c/Transaction_Test/cmake-build-debug/CMakeFiles/rebuild_cache.dir

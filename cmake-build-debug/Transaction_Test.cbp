@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Transaction_Test"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="D:/code/c/oop_c/Transaction_Test/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="D:/code/c/oop_c/Transaction_Test/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Transaction_Test">
+				<Option output="D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Transaction_Test.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/code/c/oop_c/Transaction_Test/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/code/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/code/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/code/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/code/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/code/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/code/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 Transaction_Test"/>
+					<CompileFile command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Transaction_Test/fast">
+				<Option output="D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Transaction_Test.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/code/c/oop_c/Transaction_Test/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/code/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/code/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/code/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/code/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/code/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/code/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 Transaction_Test/fast"/>
+					<CompileFile command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="D:/code/c/oop_c/Transaction_Test/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/code/mingw64/bin/mingw32-make.exe -f &quot;D:/code/c/oop_c/Transaction_Test/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="D:/code/c/oop_c/Transaction_Test/BasicOp.h">
+			<Option target="Transaction_Test"/>
+		</Unit>
+		<Unit filename="D:/code/c/oop_c/Transaction_Test/Customer.h">
+			<Option target="Transaction_Test"/>
+		</Unit>
+		<Unit filename="D:/code/c/oop_c/Transaction_Test/Merchant.h">
+			<Option target="Transaction_Test"/>
+		</Unit>
+		<Unit filename="D:/code/c/oop_c/Transaction_Test/Process.h">
+			<Option target="Transaction_Test"/>
+		</Unit>
+		<Unit filename="D:/code/c/oop_c/Transaction_Test/Product.h">
+			<Option target="Transaction_Test"/>
+		</Unit>
+		<Unit filename="D:/code/c/oop_c/Transaction_Test/ShopCart.h">
+			<Option target="Transaction_Test"/>
+		</Unit>
+		<Unit filename="D:/code/c/oop_c/Transaction_Test/User.h">
+			<Option target="Transaction_Test"/>
+		</Unit>
+		<Unit filename="D:/code/c/oop_c/Transaction_Test/main.cpp">
+			<Option target="Transaction_Test"/>
+		</Unit>
+		<Unit filename="D:/code/c/oop_c/Transaction_Test/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
